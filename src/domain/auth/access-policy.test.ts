@@ -36,6 +36,12 @@ describe("politica de acceso API", () => {
   it("no confunde prefijos parecidos", () => {
     expect(canAccessApi(permissionsForRole("ADMIN"), "/api/usersx", "GET", testApiRules)).toBe(false);
   });
+  it("catalogo: SALES/OPERATIONS leen; solo quien tiene catalog.edit escribe", () => {
+    expect(canAccessApi(permissionsForRole("SALES"), "/api/catalog/grades", "GET")).toBe(true);
+    expect(canAccessApi(permissionsForRole("SALES"), "/api/catalog/grades", "POST")).toBe(false);
+    expect(canAccessApi(permissionsForRole("OPERATIONS"), "/api/catalog/grades/d2", "PATCH")).toBe(true);
+    expect(canAccessApi([], "/api/catalog/grades", "GET")).toBe(false);
+  });
   it("/api/auth/me exige solo sesion", () => {
     expect(canAccessApi([], "/api/auth/me", "GET")).toBe(true);
   });

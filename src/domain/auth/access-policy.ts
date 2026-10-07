@@ -29,7 +29,9 @@ export const uiRules: readonly AccessRule[] = [
 ];
 
 export const apiRules: readonly AccessRule[] = [
-  { path: "/api/auth/me", exact: true, read: "authenticated" }
+  { path: "/api/auth/me", exact: true, read: "authenticated" },
+  // Catalogo: lectura interna. El catalogo PUBLICO se decide en el Atomo 3. Escritura: Atomo 9.
+  { path: "/api/catalog", read: "catalog.view", write: "catalog.edit" }
   // Atomos siguientes: /api/users, /api/quotes, /api/pricing ...
 ];
 

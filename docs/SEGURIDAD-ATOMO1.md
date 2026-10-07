@@ -9,8 +9,10 @@ Fecha: 2026-10-07. Alcance: codigo de `app/` tal como queda en este atomo. Revis
 - RBAC: API default-deny (SALES recibe 403 en `/api/users`, sin sesion 401), cookie falsa 401, origen ajeno en login 403, cuerpo invalido 400. Cabeceras `nosniff`, `X-Frame-Options: DENY`, HSTS presentes.
 - Humo con `next start` (sin base de datos): flujo de middleware correcto.
 
-## NO verificado en este atomo
-- Login de punta a punta contra PostgreSQL real y aplicacion de la migracion (el demonio de Docker no estaba activo; el SQL se genero con `prisma migrate diff`).
+## Verificado despues (Atomo 2) contra PostgreSQL 16 real
+- Migracion aplicada con `prisma migrate deploy`; login correcto (200) y fallido (401), cookie valida en `/api/auth/me`, bloqueo tras 5 fallos (429, tambien con la contrasena correcta) y auditoria registrada en `AuditLog`.
+
+## NO verificado
 - Pruebas de penetracion, SAST dedicado, revision de secretos en el historial (no hay git aun).
 
 ## Hallazgos y remediacion

@@ -1,13 +1,14 @@
 # Pibasa Cotizador (VLUX x Levet Labs)
 
 Catalogo tecnico de aceros, cotizador y seguimiento para Aceros y Servicios Pibasa.
-Estado: **Atomo 1 (cimientos)**. Aun no hay catalogo ni cotizador; ver `../MSA-ATOMOS.md`.
+Estado: **Atomo 2 (modelo de catalogo)** sobre los cimientos del Atomo 1. Aun no hay UI de catalogo ni cotizador; ver `MSA-ATOMOS.md` del proyecto.
 
 ## Que incluye hoy
 - Next.js 15 (App Router) + React 19 + TypeScript estricto + Tailwind 3.
 - PostgreSQL + Prisma 6: `User` (con bloqueo por intentos) y `AuditLog`.
 - Autenticacion propia: scrypt + sesion firmada HMAC (cookie HttpOnly), RBAC por rol (`ADMIN`, `SALES`, `OPERATIONS`), API **default-deny**.
 - Arquitectura hexagonal: `src/domain` (reglas puras) -> `src/application` (casos de uso y puertos) -> `src/infrastructure` (adaptadores Prisma/crypto/env) -> `src/app` (Next).
+- Catalogo tecnico (modelo + API de lectura interna): grados, familias, formas, medidas, equivalencias, aplicaciones, peso teorico. Datos de EJEMPLO marcados `EXAMPLE` (ver `docs/CATALOGO.md`).
 - Pruebas (Vitest), CI (`.github/workflows/ci.yml`), cabeceras de seguridad, `/api/health`.
 
 ## Arranque local
@@ -17,9 +18,10 @@ docker compose up -d        # PostgreSQL local
 npm ci
 npm run prisma:deploy       # aplica migraciones
 npm run db:seed             # crea el primer ADMIN desde SEED_ADMIN_*
+npm run db:seed:catalog     # carga el catalogo de EJEMPLO (idempotente)
 npm run dev
 ```
-Verificacion completa: `npm run verify` (lint + typecheck + tests + build).
+Verificacion completa: `npm run verify` (lint + typecheck + tests + build). Pruebas contra DB real: `RUN_DB_TESTS=1 npm test` (con el catalogo cargado).
 
 ### Nota Windows (entornos con ruta virtualizada, p. ej. apps de la Microsoft Store)
 Si `esbuild`/`prisma migrate` fallan con `spawn ENOENT`, define `ESBUILD_BINARY_PATH` y `PRISMA_SCHEMA_ENGINE_BINARY` con la ruta real (no virtualizada) de los .exe en `node_modules`.
@@ -30,4 +32,4 @@ Si `esbuild`/`prisma migrate` fallan con `spawn ENOENT`, define `ESBUILD_BINARY_
 - Nunca subir `.env`, sesiones de WhatsApp ni datos de clientes.
 - Origen: base propia de Levet Labs / VLUX (patrones de auth y WhatsApp reescritos). Sin historial git, marca ni datos de proyectos de otros clientes.
 
-Documentos: `docs/ARQUITECTURA.md`, `docs/INFRAESTRUCTURA.md`, `docs/SEGURIDAD-ATOMO1.md`.
+Documentos: `docs/CATALOGO.md`, `docs/ARQUITECTURA.md`, `docs/INFRAESTRUCTURA.md`, `docs/SEGURIDAD-ATOMO1.md`.

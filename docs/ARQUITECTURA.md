@@ -10,7 +10,7 @@ src/app/, src/middleware.ts, src/lib/   Borde web (Next): rutas, paginas, cookie
 Regla de dependencia: domain <- application <- infrastructure/app. `domain` y `application` no importan Next, Prisma ni `node:`.
 
 ## Dominios previstos (se agregan por atomo)
-Catalogo (A2-A3), Cotizacion (A4), Seguimiento (A5), Envios (A7), Mensajeria WhatsApp (A6/A12). Cada uno con su carpeta en domain/application y sus puertos.
+Catalogo (A2 modelo y lectura interna; A3 UI publica), Cotizacion (A4), Seguimiento (A5), Envios (A7), Mensajeria WhatsApp (A6/A12). Cada uno con su carpeta en domain/application y sus puertos.
 
 ## Decisiones
 - **Sesion**: token HMAC-SHA256 en cookie HttpOnly/SameSite=Lax (8 h). Se usa Web Crypto para compartir codigo entre Node y Edge (middleware). Los permisos NO viajan en el token: se derivan del rol en cada request, asi un cambio en la matriz aplica de inmediato. Limitacion: un usuario desactivado conserva su sesion hasta que expire (<= 8 h) hasta que el Atomo 9 agregue validacion contra DB en operaciones sensibles.

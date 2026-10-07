@@ -45,3 +45,118 @@ model AuditLog {
   @@index([actorId, createdAt])
   @@index([createdAt])
 }
+
+// ============================== CATALOGO TECNICO (Atomo 2) ==============================
+
+/// EXAMPLE = dato de ejemplo/referencia tipica, NO validado por Pibasa. VERIFIED = validado por Pibasa o su ficha tecnica.
+enum DataSource {
+  EXAMPLE
+  VERIFIED
+}
+
+enum ShapeType {
+  PLATE
+  ROUND_BAR
+  SQUARE_BAR
+  FLAT_BAR
+  TUBE
+}
+
+/// Condicion de suministro / acabado.
+enum SurfaceCondition {
+  HOT_ROLLED
+  COLD_DRAWN
+  GROUND
+  ANNEALED
+}
+
+model SteelFamily {
+  id          String       @id @default(cuid())
+  code        String       @unique
+  name        String
+  description String?
+  sortOrder   Int          @default(0)
+  grades      SteelGrade[]
+}
+
+model SteelGrade {
+  id                    String             @id @default(cuid())
+  code                  String             @unique // designacion comercial: "D2", "H13", "1045"
+  slug                  String             @unique // "d2", "h13", "1045"
+  name                  String
+  familyId              String
+  summary               String
+  densityGcm3           Decimal            @db.Decimal(5, 3) // para peso teorico
+  hardnessAnnealedHbMax Int?
+  hardnessWorkingHrcMin Int?
+  hardnessWorkingHrcMax Int?
+  wearResistance        Int? // 1-5 relativo
+  toughness             Int? // 1-5 relativo
+  machinability         Int? // 1-5 relativo
+  heatTreatmentNotes    String?
+  /// JSONB: {"C":{"min":1.4,"max":1.6},"Cr":{...}}. Varia por grado, no se consulta por elemento.
+  chemicalComposition   Json?
+  dataSource            DataSource         @default(EXAMPLE)
+  isActive              Boolean            @default(true)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  family                SteelFamily        @relation(fields: [familyId], references: [id])
+  equivalences          GradeEquivalence[]
+  applications          GradeApplication[]
+  variants              SteelVariant[]
+
+  @@index([familyId, isActive])
+}
+
+model GradeEquivalence {
+  id          String     @id @default(cuid())
+  gradeId     String
+  standard    String // "DIN/W.Nr", "UNS", "JIS", "AISI"
+  designation String
+  notes       String?
+  dataSource  DataSource @default(EXAMPLE)
+  grade       SteelGrade @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+
+  @@unique([gradeId, standard, designation])
+}
+
+model UsageApplication {
+  id          String             @id @default(cuid())
+  code        String             @unique
+  name        String
+  description String?
+  grades      GradeApplication[]
+}
+
+model GradeApplication {
+  gradeId       String
+  applicationId String
+  grade         SteelGrade       @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+  application   UsageApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@id([gradeId, applicationId])
+  @@index([applicationId])
+}
+
+/// Medida estandar suministrable de un grado (forma + dimensiones + condicion). Sin precios (Atomo 4).
+model SteelVariant {
+  id            String           @id @default(cuid())
+  gradeId       String
+  shape         ShapeType
+  condition     SurfaceCondition
+  thicknessMm   Decimal?         @db.Decimal(8, 3)
+  widthMm       Decimal?         @db.Decimal(8, 3)
+  diameterMm    Decimal?         @db.Decimal(8, 3) // redondo y diametro exterior de tubo
+  sideMm        Decimal?         @db.Decimal(8, 3)
+  wallMm        Decimal?         @db.Decimal(8, 3)
+  stockLengthMm Int? // largo comercial de la barra/placa, si aplica
+  /// Llave determinista generada por el dominio (grado|forma|condicion|dimensiones). Evita duplicados con NULLs.
+  dimensionKey  String           @unique
+  dataSource    DataSource       @default(EXAMPLE)
+  isActive      Boolean          @default(true)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  grade         SteelGrade       @relation(fields: [gradeId], references: [id], onDelete: Cascade)
+
+  @@index([gradeId, shape, isActive])
+}

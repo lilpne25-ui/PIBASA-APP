@@ -119,3 +119,33 @@ body {
   outline: 2px solid rgba(111, 183, 201, 0.75);
   outline-offset: 3px;
 }
+
+/* ---- Demo guiada (/demo) ---- */
+/* Resaltado del elemento que la narracion esta explicando: luz fria, no un marco de color plano. */
+.exp-focus {
+  border-radius: 0.75rem;
+  outline: 1px solid rgba(111, 183, 201, 0.55);
+  outline-offset: 5px;
+  scroll-margin-block: 90px 210px;
+  box-shadow: 0 0 44px -10px rgba(111, 183, 201, 0.45);
+  transition: outline-color 0.5s, box-shadow 0.5s;
+}
+.demo-pill-btn {
+  @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-lg text-steel-100 transition-[background-color,color,transform] duration-200 hover:bg-ink-700/70 active:scale-95 disabled:opacity-30;
+}
+@keyframes demo-wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.4); }
+}
+.demo-wave i { animation: demo-wave 0.9s ease-in-out infinite; }
+.demo-wave i:nth-child(2) { animation-delay: 0.15s; }
+.demo-wave i:nth-child(3) { animation-delay: 0.3s; }
+.demo-wave i:nth-child(4) { animation-delay: 0.45s; }
+@media (prefers-reduced-motion: reduce) {
+  .demo-wave i { animation: none; }
+  .demo-overlay *, .demo-overlay *::before, .demo-overlay *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

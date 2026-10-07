@@ -1,0 +1,61 @@
+{
+  "language": "es-MX",
+  "modelEnv": "ELEVENLABS_MODEL_ID",
+  "defaultModel": "eleven_multilingual_v2",
+  "voices": {
+    "mujer": { "label": "Voz femenina", "voiceIdEnv": "ELEVENLABS_VOICE_ID_MUJER" },
+    "hombre": { "label": "Voz masculina", "voiceIdEnv": "ELEVENLABS_VOICE_ID_HOMBRE" }
+  },
+  "scenes": [
+    {
+      "id": "welcome",
+      "voice": ["mujer", "hombre"],
+      "text": "Bienvenidos a Aceros y Servicios Pibasa. Hoy recorreremos cómo podría verse cotizar acero a medida, desde que un taller busca un grado hasta que ustedes le dan seguimiento. El catálogo que verán ya está construido. Lo demás es una simulación con datos de ejemplo, para conversar sobre lo que realmente necesitan."
+    },
+    {
+      "id": "today",
+      "voice": ["mujer", "hombre"],
+      "text": "Veamos el punto de partida. Un taller de matricería en León escribe: necesita solera de acero D2, cuatro piezas cortadas. Del otro lado, alguien debe preguntar medidas, calcular peso, sumar corte y flete. Este escenario es típico del giro, no una descripción de su operación. Queremos que ustedes nos cuenten cómo es hoy."
+    },
+    {
+      "id": "catalog",
+      "voice": ["mujer", "hombre"],
+      "text": "Primero, el cliente encuentra el acero. Este catálogo ya existe y es real: busca D2 y abre su ficha, con propiedades, equivalencias, aplicaciones y medidas con peso teórico por metro. Un detalle importante: los valores cargados son de ejemplo, valores típicos del material, hasta que Pibasa los valide con sus propias fichas."
+    },
+    {
+      "id": "quote",
+      "voice": ["mujer", "hombre"],
+      "text": "Ahora, el cotizador. Esta pantalla es una simulación. El taller elige D2, solera de media pulgada por cuatro, cuatro piezas de trescientos milímetros, con corte, y destino León. El peso teórico sale de la densidad del catálogo. Los precios, el corte y el flete son cifras ilustrativas, no tarifas de Pibasa."
+    },
+    {
+      "id": "folio",
+      "voice": ["mujer", "hombre"],
+      "text": "La solicitud no se queda en una conversación. Al enviarla se genera un folio, y el mensaje llega a WhatsApp ya estructurado: grado, medidas, cantidad y destino. El taller puede consultar el estado con ese folio, sin crear cuenta. Aquí el envío es simulado; la conexión real con WhatsApp se construye y valida en el proyecto."
+    },
+    {
+      "id": "panel",
+      "voice": ["mujer", "hombre"],
+      "text": "Del lado de Pibasa, cada solicitud cae en una bandeja con su estado: nueva, en cotización, enviada, seguimiento, ganada o perdida. Ventas ve qué falta por contestar y a quién darle seguimiento. Esta pantalla es una simulación con cotizaciones ficticias; los estados y permisos finales se definen con ustedes."
+    },
+    {
+      "id": "owner",
+      "voice": ["mujer", "hombre"],
+      "text": "Esta es la vista del dueño. Con las cotizaciones registradas se puede leer cuántas se piden, cuántas se ganan y por qué se pierden. Las cifras en pantalla son ilustrativas, no son datos de Pibasa. Los reportes de conversión completos pertenecen a la segunda fase, y dependen de que el equipo capture el seguimiento."
+    },
+    {
+      "id": "scope",
+      "voice": ["mujer", "hombre"],
+      "text": "El alcance va por fases. La primera entrega el catálogo, el cotizador con precio estimado, el envío por WhatsApp o formulario con folio, el panel de seguimiento, el PDF, la consulta por folio y envíos nacionales, en seis a ocho semanas. La segunda agrega un bot de WhatsApp y reportes. El precio estimado depende de la lista que Pibasa autorice."
+    },
+    {
+      "id": "roi",
+      "voice": ["mujer", "hombre"],
+      "text": "Pongamos números sobre la mesa. Esta calculadora tiene supuestos editables: cotizaciones al mes, minutos por cotización, costo por hora y oportunidades perdidas. Los valores iniciales son ilustrativos. Es un escenario para conversar, no una promesa de ahorro. La decisión debe partir de los números reales de Pibasa."
+    },
+    {
+      "id": "close",
+      "voice": ["mujer", "hombre"],
+      "text": "Para cerrar: lo que vieron es el catálogo real y una simulación fiel al alcance propuesto. El siguiente paso es validar con ustedes su lista de grados, medidas y precios, y cómo cotizan hoy. Con eso afinamos el alcance de la primera fase. Gracias por recorrer esta experiencia con VLUX."
+    }
+  ]
+}

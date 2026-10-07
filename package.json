@@ -21,6 +21,7 @@
     "prisma:deploy": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:catalog": "tsx prisma/seed-catalog.ts",
+    "demo:voice": "node --env-file-if-exists=.env scripts/generate-voice.mjs",
     "audit:prod": "npm audit --omit=dev"
   },
   "dependencies": {

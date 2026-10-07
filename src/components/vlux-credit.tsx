@@ -1,16 +1,10 @@
-import Image from "next/image";
+import { VluxMark } from "@/components/vlux-mark";
 
-/** Credito de autoria. El JPG tiene fondo negro: mix-blend-screen lo integra sobre el fondo oscuro. */
+/** Credito de autoria discreto: marca VLUX como luz (sin placa) + texto. */
 export function VluxCredit() {
   return (
     <p className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.25em] text-steel-500/80">
-      <Image
-        src="/brand/vlux/app-icon-neon-con-vlux.jpg"
-        alt="VLUX"
-        width={512}
-        height={640}
-        className="h-9 w-auto opacity-80 mix-blend-screen"
-      />
+      <VluxMark height={30} />
       <span>Desarrollado por VLUX</span>
     </p>
   );

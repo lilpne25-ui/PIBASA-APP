@@ -75,4 +75,13 @@ describe("rutas publicas", () => {
     expect(isRateLimitedPublicPath("/catalogo/h13")).toBe(true);
     expect(isRateLimitedPublicPath("/login")).toBe(false);
   });
+
+  it("demo guiada: /demo y sus subrutas (MP3) son publicas y con rate limit, sin colarse a otras", () => {
+    expect(isPublicPath("/demo")).toBe(true);
+    expect(isPublicPath("/demo/narration/quote-mujer.mp3")).toBe(true);
+    expect(isRateLimitedPublicPath("/demo")).toBe(true);
+    expect(isPublicPath("/demos")).toBe(false);
+    expect(isPublicPath("/demo-admin")).toBe(false);
+    expect(isPublicPath("/api/demo")).toBe(false);
+  });
 });

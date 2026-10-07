@@ -25,10 +25,11 @@ export const publicPaths: readonly string[] = [
 ];
 
 /**
- * Prefijos publicos de SOLO LECTURA (la ruta y sus subrutas). El catalogo publico (Atomo 3) no tiene
- * endpoints de escritura ni de API: son paginas renderizadas en servidor con DTO publico.
+ * Prefijos publicos de SOLO LECTURA (la ruta y sus subrutas). El catalogo publico (Atomo 3) y la demo guiada
+ * (Atomo D: /demo y sus MP3 en /demo/narration) no tienen endpoints de escritura ni de API: son paginas
+ * renderizadas en servidor con DTO publico y simulaciones locales en el navegador.
  */
-export const publicPrefixes: readonly string[] = ["/catalogo"];
+export const publicPrefixes: readonly string[] = ["/catalogo", "/demo"];
 
 /** Rutas publicas que ademas llevan limite de peticiones por IP. */
 export function isRateLimitedPublicPath(pathname: string): boolean {

@@ -1,0 +1,14 @@
+# PostgreSQL local de desarrollo. Credenciales solo para uso local.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: pibasa
+      POSTGRES_PASSWORD: pibasa_local_dev
+      POSTGRES_DB: pibasa
+    ports:
+      - "5432:5432"
+    volumes:
+      - pibasa_pg:/var/lib/postgresql/data
+volumes:
+  pibasa_pg:

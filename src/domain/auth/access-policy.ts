@@ -19,8 +19,21 @@ export const publicPaths: readonly string[] = [
   "/login",
   "/api/auth/login",
   "/api/auth/logout",
-  "/api/health"
+  "/api/health",
+  "/robots.txt",
+  "/sitemap.xml"
 ];
+
+/**
+ * Prefijos publicos de SOLO LECTURA (la ruta y sus subrutas). El catalogo publico (Atomo 3) no tiene
+ * endpoints de escritura ni de API: son paginas renderizadas en servidor con DTO publico.
+ */
+export const publicPrefixes: readonly string[] = ["/catalogo"];
+
+/** Rutas publicas que ademas llevan limite de peticiones por IP. */
+export function isRateLimitedPublicPath(pathname: string): boolean {
+  return publicPrefixes.some((p) => pathname === p || pathname.startsWith(p + "/"));
+}
 
 export const uiRules: readonly AccessRule[] = [
   { path: "/", exact: true, read: "dashboard.view" },
@@ -38,7 +51,7 @@ export const apiRules: readonly AccessRule[] = [
 const READ_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
 
 export function isPublicPath(pathname: string): boolean {
-  return publicPaths.includes(pathname);
+  return publicPaths.includes(pathname) || isRateLimitedPublicPath(pathname);
 }
 
 function matches(rule: AccessRule, pathname: string): boolean {

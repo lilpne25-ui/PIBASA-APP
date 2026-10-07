@@ -40,8 +40,7 @@ export function LoginForm() {
     }
   }
 
-  const field =
-    "mt-2 w-full rounded-lg border border-ink-600 bg-ink-950 px-4 py-3 text-steel-100 transition-colors duration-200 placeholder:text-steel-500 focus:border-signal";
+  const field = "field mt-2";
 
   return (
     <form onSubmit={onSubmit} className="mt-6 space-y-5" noValidate>
@@ -59,7 +58,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-signal px-4 py-3 font-medium text-ink-950 transition-transform duration-200 ease-spring hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] disabled:opacity-60"
+        className="btn btn-primary w-full"
       >
         {pending ? "Verificando..." : "Entrar"}
       </button>

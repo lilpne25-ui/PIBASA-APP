@@ -6,14 +6,98 @@
   color-scheme: dark;
 }
 
+/* Fondo: acero oscuro con una veta de luz fria muy tenue y una malla casi invisible.
+   El cian es un reflejo, no un color de relleno. */
 body {
   @apply bg-ink-950 text-steel-100 antialiased;
   font-family: var(--font-display), system-ui, sans-serif;
   background-image:
-    radial-gradient(1200px 600px at 85% -10%, rgba(95, 208, 232, 0.07), transparent 60%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: auto, 48px 48px, 48px 48px;
+    radial-gradient(900px 480px at 88% -8%, rgba(111, 183, 201, 0.055), transparent 65%),
+    radial-gradient(700px 420px at -5% 105%, rgba(160, 175, 190, 0.045), transparent 60%),
+    linear-gradient(rgba(224, 248, 248, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(224, 248, 248, 0.018) 1px, transparent 1px);
+  background-size: auto, auto, 56px 56px, 56px 56px;
+  background-attachment: fixed;
+}
+
+@layer components {
+  /* Superficie: placa de acero cepillado con borde fino y luz superior. */
+  .panel {
+    @apply relative rounded-2xl border border-ink-600/70 bg-ink-900/70;
+    background-image: repeating-linear-gradient(90deg, rgba(224, 248, 248, 0.012) 0 1px, transparent 1px 3px);
+    box-shadow: inset 0 1px 0 rgba(224, 248, 248, 0.045), 0 18px 40px -28px rgba(0, 0, 0, 0.9);
+  }
+  .panel-hover {
+    @apply transition-[border-color,box-shadow,transform] duration-300 ease-spring;
+  }
+  .panel-hover:hover {
+    border-color: rgba(111, 183, 201, 0.32);
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(224, 248, 248, 0.07),
+      0 0 46px -16px rgba(111, 183, 201, 0.32),
+      0 22px 44px -28px rgba(0, 0, 0, 0.95);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-3 text-sm font-medium transition-[border-color,box-shadow,transform,color] duration-300 ease-spring;
+  }
+  .btn:active {
+    transform: scale(0.99);
+  }
+  /* Primario: metal oscuro con filo cian; el resplandor aparece al interactuar. */
+  .btn-primary {
+    @apply text-steel-100;
+    border-color: rgba(111, 183, 201, 0.34);
+    background-image: linear-gradient(180deg, #1b2639 0%, #0f1725 100%);
+    box-shadow: inset 0 1px 0 rgba(224, 248, 248, 0.09), 0 10px 24px -14px rgba(0, 0, 0, 0.9);
+  }
+  .btn-primary:hover:not(:disabled) {
+    border-color: rgba(111, 183, 201, 0.62);
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(224, 248, 248, 0.12),
+      0 0 30px -8px rgba(111, 183, 201, 0.42),
+      0 10px 24px -14px rgba(0, 0, 0, 0.9);
+  }
+  .btn-ghost {
+    @apply border-ink-600 text-steel-300 hover:border-signal/40 hover:text-steel-100;
+  }
+  .btn:disabled {
+    @apply opacity-60;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-ink-600 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-steel-300 transition-colors duration-200;
+  }
+  a.chip:hover {
+    @apply border-signal/40 text-steel-100;
+  }
+  .chip-active {
+    @apply border-signal/50 text-steel-100;
+    background-image: linear-gradient(180deg, rgba(111, 183, 201, 0.14), rgba(111, 183, 201, 0.04));
+    box-shadow: 0 0 22px -10px rgba(111, 183, 201, 0.5);
+  }
+  .chip-warn {
+    @apply border-amber/40 text-amber;
+    background-color: rgba(217, 164, 65, 0.07);
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-ink-600 bg-ink-950/80 px-4 py-3 text-steel-100 transition-[border-color,box-shadow] duration-300 placeholder:text-steel-500;
+  }
+  .field:focus {
+    border-color: rgba(111, 183, 201, 0.55);
+    box-shadow: 0 0 0 4px rgba(111, 183, 201, 0.08);
+    outline: none;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.3em] text-signal/80;
+  }
+  .hairline {
+    @apply border-t border-ink-600/70;
+  }
 }
 
 /* Movimiento sobrio: presencia por opacidad/desplazamiento corto, respetando preferencia del usuario. */
@@ -27,9 +111,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .rise-in { animation: none; }
+  .panel-hover, .btn { transition: none; }
+  .panel-hover:hover, .btn-primary:hover { transform: none; }
 }
 
 :focus-visible {
-  outline: 2px solid theme("colors.signal.DEFAULT");
+  outline: 2px solid rgba(111, 183, 201, 0.75);
   outline-offset: 3px;
 }

@@ -12,7 +12,7 @@ export function SignOutButton() {
         router.replace("/login");
         router.refresh();
       }}
-      className="rounded-lg border border-ink-600 px-4 py-2 text-sm text-steel-300 transition-colors duration-200 hover:border-signal hover:text-signal"
+      className="btn btn-ghost !px-4 !py-2"
     >
       Salir
     </button>

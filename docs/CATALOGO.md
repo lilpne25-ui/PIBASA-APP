@@ -22,3 +22,10 @@ Para pasar a datos reales: Pibasa entrega su lista de grados/medidas; se cargan 
 - `GET /api/catalog/grades?family=&shape=&q=` (permiso `catalog.view`; `q` busca en codigo, nombre y equivalencias).
 - `GET /api/catalog/grades/:slug` — detalle con equivalencias, aplicaciones, composicion y medidas con peso por metro.
 - Escritura: reservada a `catalog.edit` (sin endpoints todavia; Atomo 9).
+
+## Catalogo publico (Atomo 3)
+- Paginas SSR sin login: `/catalogo` (listado, filtros por familia, forma y busqueda por codigo/nombre/equivalencia) y `/catalogo/[slug]` (propiedades, composicion, equivalencias, aplicaciones y medidas con kg/m).
+- Usan el **DTO publico** (`PublicGradeCard` / `PublicGradeSheet`), nunca el modelo interno. Sin precios.
+- Aviso "Datos de ejemplo" visible mientras `dataSource = EXAMPLE`; ademas `noindex` y sitemap vacio hasta verificar.
+- CTA "Solicitar cotizacion": placeholder hacia WhatsApp (`NEXT_PUBLIC_WHATSAPP_NUMBER`) hasta que exista el cotizador (Atomo 4+).
+- Detalle de seguridad: `docs/SEGURIDAD-ATOMO3.md`.

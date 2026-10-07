@@ -1,5 +1,6 @@
 import "server-only";
 import { GetGradeDetail, ListGrades } from "@/application/catalog/catalog-queries";
+import { PublicCatalog } from "@/application/catalog/public-catalog";
 import { AuthenticateUser } from "@/application/auth/authenticate-user";
 import { HmacSessionCodec } from "@/infrastructure/auth/hmac-session-codec";
 import { ScryptPasswordHasher } from "@/infrastructure/auth/scrypt-password-hasher";
@@ -24,3 +25,4 @@ export function getAuthenticateUser() {
 
 export const getListGrades = () => new ListGrades(new PrismaCatalogRepository());
 export const getGetGradeDetail = () => new GetGradeDetail(new PrismaCatalogRepository());
+export const getPublicCatalog = () => new PublicCatalog(new PrismaCatalogRepository());

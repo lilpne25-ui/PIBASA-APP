@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canAccessApi, canAccessUi, isPublicPath, type AccessRule } from "./access-policy";
+import { canAccessApi, canAccessUi, isPublicPath, isRateLimitedPublicPath, type AccessRule } from "./access-policy";
 import { permissionsForRole, rolePermissions, permissionKeys } from "./permissions";
 
 const testApiRules: AccessRule[] = [
@@ -63,5 +63,16 @@ describe("rutas publicas", () => {
     expect(isPublicPath("/api/health")).toBe(true);
     expect(isPublicPath("/api/auth/me")).toBe(false);
     expect(isPublicPath("/login/../api/users")).toBe(false);
+  });
+  it("catalogo publico: la ruta y sus subrutas, sin colarse a otras", () => {
+    expect(isPublicPath("/catalogo")).toBe(true);
+    expect(isPublicPath("/catalogo/d2")).toBe(true);
+    expect(isPublicPath("/robots.txt")).toBe(true);
+    expect(isPublicPath("/catalogox")).toBe(false);
+    expect(isPublicPath("/catalogo-admin")).toBe(false);
+    expect(isPublicPath("/api/catalog/grades")).toBe(false);
+    expect(isPublicPath("/")).toBe(false);
+    expect(isRateLimitedPublicPath("/catalogo/h13")).toBe(true);
+    expect(isRateLimitedPublicPath("/login")).toBe(false);
   });
 });

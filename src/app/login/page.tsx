@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <main className="mx-auto grid min-h-dvh max-w-5xl items-center gap-12 px-6 py-16 md:grid-cols-[1.1fr_0.9fr]">
       <section className="rise-in">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-signal">Pibasa / acceso interno</p>
+        <p className="eyebrow">Pibasa / acceso interno</p>
         <h1 className="mt-6 text-5xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
           Acero a medida,
           <br />
@@ -18,7 +18,7 @@ export default function LoginPage() {
         </p>
       </section>
 
-      <section className="rise-in rise-in-2 rounded-2xl border border-ink-600 bg-ink-900/80 p-8 backdrop-blur">
+      <section className="panel rise-in rise-in-2 p-8">
         <h2 className="text-lg font-medium">Iniciar sesion</h2>
         <Suspense fallback={null}>
           <LoginForm />

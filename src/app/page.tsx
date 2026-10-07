@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentSession } from "@/lib/session";
+import { VluxCredit } from "@/components/vlux-credit";
 import { SignOutButton } from "@/components/sign-out-button";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +38,10 @@ export default async function HomePage() {
           ))}
         </ul>
       </section>
+
+      <footer className="mt-16">
+        <VluxCredit />
+      </footer>
     </main>
   );
 }

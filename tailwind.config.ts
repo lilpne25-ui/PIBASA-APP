@@ -1,15 +1,18 @@
 import type { Config } from "tailwindcss";
 
-// Tokens PROVISIONALES. La paleta final sale de los logos VLUX (Drive, carpeta "LOGOS VLUX")
-// y del logo de Pibasa, que aun no tenemos. Cambiar aqui, no en los componentes.
+// Paleta derivada de los logos VLUX (carpeta "LOGOS VLUX"):
+//  - fondo (ink-950): #01040d medido en 1-logotipo-principal.jpg (fondo azul-negro).
+//  - blanco gelido (steel-100): #e0f8f8 medido en el texto del logo horizontal.
+//  - acento cian (signal): ~#5fd0e8 ESTIMADO a ojo del resplandor del logo (los JPG tienen antialias).
+// Pibasa aun no entrega su logo: cuando llegue, su color de marca reemplaza a "signal" en la app.
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: { 950: "#08090b", 900: "#0e1014", 800: "#151821", 700: "#1e222d", 600: "#2b3040" },
-        steel: { 100: "#e8ebf0", 300: "#aab1bf", 500: "#6f7889" },
-        signal: { DEFAULT: "#c6ff3d", dim: "#8fb82a" },
+        ink: { 950: "#01040d", 900: "#060b17", 800: "#0b1322", 700: "#131c2e", 600: "#1f2b40" },
+        steel: { 100: "#e0f8f8", 300: "#9fb3bd", 500: "#62747f" },
+        signal: { DEFAULT: "#5fd0e8", dim: "#3a9db3" },
         danger: "#ff5c5c"
       },
       fontFamily: {

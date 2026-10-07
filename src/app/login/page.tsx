@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { VluxCredit } from "@/components/vlux-credit";
 import { LoginForm } from "./login-form";
 
 export default function LoginPage() {
@@ -23,6 +24,10 @@ export default function LoginPage() {
           <LoginForm />
         </Suspense>
       </section>
+
+      <footer className="rise-in rise-in-3 md:col-span-2">
+        <VluxCredit />
+      </footer>
     </main>
   );
 }

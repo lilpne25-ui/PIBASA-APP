@@ -20,4 +20,4 @@ Catalogo (A2-A3), Cotizacion (A4), Seguimiento (A5), Envios (A7), Mensajeria Wha
 - **Prisma 6 / Postgres**: JSONB solo se usa en `AuditLog.metadata`. Partidas, precios y estados de cotizacion iran relacionales.
 - **Next 15** (no 16) por estabilidad del middleware y `next lint`; migrar a 16 esta en el plan del Atomo 10 (advisory de postcss embebido).
 - **WhatsApp**: Meta Cloud API oficial (Baileys descartado para produccion). Aun no integrado; variables en `.env.example`.
-- **Marca**: tokens de color/tipografia provisionales en `tailwind.config.ts`; se reemplazan al contar con los logos VLUX (Drive) y el logo de Pibasa.
+- **Marca**: paleta derivada de los logos VLUX (ver comentario en `tailwind.config.ts`; el cian es estimacion visual). El logo de Pibasa aun no existe; la marca principal de la app sera Pibasa y VLUX aparece como credito de autoria.
